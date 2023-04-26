@@ -9,18 +9,21 @@ function App() {
     "Finish cleaning room",
     "Plan proposal",
     "Play games",
-    "Work on websites"
-  ])
+    "Work on websites",
+  ]);
+
+  // const itemsDisplay = []
+  // for (let i = 0; i < itemList.length; i++) {
+  //   itemsDisplay.push(<ListItem item={itemList[i]} />)
+  // }
 
   return (
     <div className="App">
       this is app.jsx
-      <ListItem item={itemList[0]} />
-      <ListItem item={itemList[1]} />
-      <ListItem item={itemList[2]} />
-      <ListItem item={itemList[3]} />
-      <ListItem item={itemList[4]} />
-      </div>
+      {itemList.map((task, index) => {
+        return <ListItem item={task} key={index} />;
+      })}
+    </div>
   );
 }
 
