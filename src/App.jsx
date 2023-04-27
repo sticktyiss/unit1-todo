@@ -11,29 +11,39 @@ function App() {
     "Play games",
     "Work on websites",
   ]);
+  const [inputVal, setInputVal] = useState("");
 
   const submitHandler = (e) => {
     e.preventDefault();
+    setItemList([...itemList, inputVal]);
     setInputVal("");
-  }
-  const [inputVal, setInputVal] = useState("");
+  };
+
+  const removeItemFromList = (index) => {
+    itemList.splice(index, 1);
+    setItemList([...itemList]);
+  };
 
   return (
     <div className="App">
       <h1>To Do List</h1>
 
-      <form onSubmit={submitHandler}>
+      <form onSubmit={(e) => submitHandler(e)}>
         <input
           placeholder="Write task here..."
+          value={inputVal}
           onChange={(e) => setInputVal(e.target.value)}
         />
-        <button onClick={() => setItemList([...itemList, inputVal])}>
-          Add
-        </button>
+        <button>Add</button>
       </form>
-      {itemList.map((task, index) => {
-        return <ListItem item={task} key={index} />;
-      })}
+      {itemList.map((task, index) => (
+        <ListItem
+          item={task}
+          key={index}
+          index={index}
+          removeItemFromList={removeItemFromList}
+        />
+      ))}
     </div>
   );
 }
