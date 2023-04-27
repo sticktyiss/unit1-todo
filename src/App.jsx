@@ -12,14 +12,25 @@ function App() {
     "Work on websites",
   ]);
 
-  // const itemsDisplay = []
-  // for (let i = 0; i < itemList.length; i++) {
-  //   itemsDisplay.push(<ListItem item={itemList[i]} />)
-  // }
+  const submitHandler = (e) => {
+    e.preventDefault();
+    setInputVal("");
+  }
+  const [inputVal, setInputVal] = useState("");
 
   return (
     <div className="App">
-      this is app.jsx
+      <h1>To Do List</h1>
+
+      <form onSubmit={submitHandler}>
+        <input
+          placeholder="Write task here..."
+          onChange={(e) => setInputVal(e.target.value)}
+        />
+        <button onClick={() => setItemList([...itemList, inputVal])}>
+          Add
+        </button>
+      </form>
       {itemList.map((task, index) => {
         return <ListItem item={task} key={index} />;
       })}
